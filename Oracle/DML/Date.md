@@ -6,14 +6,23 @@ grand_parent: Oracle
 nav_order: 1
 ---
 <div style="text-align: right;">
-작성일자 : 2023-07-04
+작성일자 : 2023-07-04<br>
+수정일자 : 2023-07-23
 </div>
 
-## <span style="background-color:#FFF5b1">1. 날짜 함수(Date Funtion)</span>
+
+## <span style="background-color:#FFF5b1">1. 날짜 함수(Date Funtion)</span> <a id="chapter-1"></a>
 {: .d-inline-block }
 
-Ver 0.1.1
+Ver 0.1.2
 {: .label .label-green }
+
+
+- [1. 날짜 함수(Date Function)](#chapter-1)<br>
+- [2. 날짜 정보 추출 (Extract Date Information)](#chapter-2)<br>
+- [3. 날짜 형식 (Date Format)](#chapter-3)<br>
+- [4. 날짜 및 시간 연산 (Date and Time Calculations)](#chapter-4)<br>
+
 
 쿼리문을 작성함에 있어서 날짜를 잘 다루는 것은 <span style="background-color:#FAB4B4">기본이자 필수</span>이다. 나 같은 경우는 실제로 프로젝트 당시 태블로로 대시보드를 만든 후 원본 데이터로 검증을 할 때 WHERE 절에 년도 또는 월 등 기간 조건을 적용시켜 데이터를 검증을 많이 하곤 한다. 이럴 때 날짜 함수들을 많이 사용하였다. 뿐만 아니라 상황에 따라 날짜들 끼리 연산을 해야하는 경우도 있을 것이다.
 
@@ -23,7 +32,7 @@ When writing a query statement, it is both basic and essential to handle the dat
 
 From now on, I will summarize the method of extracting date information, date format, and date and time operations.
 
-## <span style="background-color:#FFF5b1">2. 날짜 정보 추출 (Extract Date Information)</span>
+## <span style="background-color:#FFF5b1">2. 날짜 정보 추출 (Extract Date Information)</span> <a id="chapter-2"></a>
 EXTRACT 함수는 오라클에서 날짜 유형의 데이터로부터 날짜 정보를 분리하여 새로운 컬럼의 형태로 추출해주는 함수이다.
 
 The EXTRACT function is a function that separates date information from date-type data in Oracle and extracts it in the form of a new column.
@@ -49,7 +58,7 @@ from DUAL;
 
 Basically, it has a date attribute, and information extracted from the date (year, month, day, hour, minute) has a numeric attribute.
 
-## <span style="background-color:#FFF5b1">3. 날짜 형식 (Date Format)</span>
+## <span style="background-color:#FFF5b1">3. 날짜 형식 (Date Format)</span> <a id="chapter-3"></a>
 아래와 같이 다양한 인자를 통해서 날짜를 다양한 형태로 조회 할 수 있다.
 
 The date can be inquired in various forms through various factors as follows.
@@ -96,7 +105,7 @@ select sysdate
 |2023-07-04 10:39:17.000|화|火|TUE|화요일|火曜日|TUESDAY|
 
 
-## <span style="background-color:#FFF5b1">4. 날짜 및 시간 연산 (Date and Time Calculations)</span>
+## <span style="background-color:#FFF5b1">4. 날짜 및 시간 연산 (Date and Time Calculations)</span> <a id="chapter-4"></a>
 아래 함수들은 다양한 형태로 날짜 및 시간을 연산하는 함수들이다. 이를 익혀두고 잘 활용하면 날짜를 다루는 것이 비교적 쉬워질 것이라 생각한다. 
 
 The following functions are functions that calculate date and time in various forms. I think it will be relatively easy to handle the date if I learn it and use it well.
