@@ -1,0 +1,860 @@
+---
+title: Python Basic(1) 
+layout: default
+parent: Python
+has_children: false
+nav_order: 1
+---
+
+<head>
+  <style>
+    table.dataframe {
+      white-space: normal;
+      width: 100%;
+      height: 240px;
+      display: block;
+      overflow: auto;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      line-height: 20px;
+      text-align: center;
+      border: 0px !important;
+    }
+
+    table.dataframe th {
+      text-align: center;
+      font-weight: bold;
+      padding: 8px;
+    }
+
+    table.dataframe td {
+      text-align: center;
+      padding: 8px;
+    }
+
+    table.dataframe tr:hover {
+      background: #b8d1f3; 
+    }
+
+    .output_prompt {
+      overflow: auto;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      border-radius: 0.3rem;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.8rem;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      color: $code-text-color;
+      border: solid 1px $border-color;
+      border-radius: 0.3rem;
+      word-break: normal;
+      white-space: pre;
+    }
+
+  .dataframe tbody tr th:only-of-type {
+      vertical-align: middle;
+  }
+
+  .dataframe tbody tr th {
+      vertical-align: top;
+  }
+
+  .dataframe thead th {
+      text-align: center !important;
+      padding: 8px;
+  }
+
+  .page__content p {
+      margin: 0 0 0px !important;
+  }
+
+  .page__content p > strong {
+    font-size: 0.8rem !important;
+  }
+
+  </style>
+</head>
+
+
+1. 파이썬 노트북 Syntax
+
+ - 노트북은 셀(cell)이라는 네모 칸들로 구성된
+
+     - 노트북을 새로 만들면 하나의 셀만 표시되어 있음
+
+     - 단축키 b를 누르면 같은 결과를 얻을 수 있으며, a를 누르면 현재 셀 위에 새로운 셀이 추가됨
+
+ - H 키를 눌러 다양한 단축키를 확인할 수 있음
+
+
+
+```python
+1+2+3
+```
+
+<pre>
+6
+</pre>
+
+```python
+print("Hi I'm JayJay")
+```
+
+<pre>
+Hi I'm JayJay
+</pre>
+
+```python
+a = 10
+b = a+5
+b
+```
+
+<pre>
+15
+</pre>
+
+```python
+print(a,b)
+print(0, "JayJay", a+b)
+```
+
+<pre>
+10 15
+0 JayJay 25
+</pre>
+
+```python
+a= 10
+b = 10.5
+c = "jayjay"
+d = (a==b)
+e = None
+
+print(a,b,c,d,e)
+print(type(a),type(b),type(c),type(d),type(e))
+```
+
+<pre>
+10 10.5 jayjay False None
+<class 'int'> <class 'float'> <class 'str'> <class 'bool'> <class 'NoneType'>
+</pre>
+
+```python
+a = "Hello jayjay"
+
+print(a[2:5])
+print(a[:6])
+print(a[6:])
+```
+
+<pre>
+llo
+Hello 
+jayjay
+</pre>
+
+```python
+a = "Hello jayjay"
+b = a.replace('jay','JAY')
+print(b)
+```
+
+<pre>
+Hello JAYJAY
+</pre>
+
+```python
+height = 173
+weight = 71
+
+a = "나의 키는 {}cm이고, 몸무게는 {}kg 입니다.".format(height, weight)
+print(a)
+```
+
+<pre>
+나의 키는 173cm이고, 몸무게는 71kg 입니다.
+</pre>
+
+```python
+a = "I'm a boy you are a girl"
+b = a.split()
+print(b)
+```
+
+<pre>
+["I'm", 'a', 'boy', 'you', 'are', 'a', 'girl']
+</pre>
+
+```python
+c = a.split('a')
+print(c)
+```
+
+<pre>
+["I'm ", ' boy you ', 're ', ' girl']
+</pre>
+# 리스트(list)
+
+ - 다양한 형태의 원소(item)를 하나의 집합으로 모아 표현하는 데이터 구조
+
+ - 빈 list도 생성 가능
+
+ - [  ] 형태로 표현
+
+ - 리스트는 다른 리스트의 원소가 될 수 있음
+
+
+
+```python
+a = []                              # 비어있는 리스트
+b = [1,2,3]                         # 숫자를 요소값으로 가질 수 있음
+c = ['Life', 'is', 'too', 'short']  # 문자열을 요소값으로 가질 수 있음
+d = [1,2,'Life', 'is']              # 숫자와 문자열을 함께 요소값으로 가질 수 있음
+e = [1,2, ['Life', 'is']]           # 리스트 자체를 요소값으로 가질 수 있음
+
+print(a)
+print(b)
+print(c)
+print(d)
+print(e)
+```
+
+<pre>
+[]
+[1, 2, 3]
+['Life', 'is', 'too', 'short']
+[1, 2, 'Life', 'is']
+[1, 2, ['Life', 'is']]
+</pre>
+
+```python
+#문자열 -> 리스트 변환
+a = "Hello JayJay"
+b = list(a)
+print(b)
+```
+
+<pre>
+['H', 'e', 'l', 'l', 'o', ' ', 'J', 'a', 'y', 'J', 'a', 'y']
+</pre>
+
+```python
+#튜블 -> 리스트 변환
+c = (2, 5,10)
+d = list(c)
+print(d)
+```
+
+<pre>
+[2, 5, 10]
+</pre>
+- 문자열 split() 함수를 통해 생성
+
+ - 문자열에서 언급했던 split() 함수, 결과가 리스트 형태로 반환
+
+
+
+```python
+a = "I'm a boy you are a girl"
+b = a.split()
+
+print(b)
+```
+
+<pre>
+["I'm", 'a', 'boy', 'you', 'are', 'a', 'girl']
+</pre>
+## 5.1 리스트 인덱스
+
+    - 문자열의 인덱스와 같은 개념으로 사용가능
+
+    - 하나의 원소만 추출할 경우 해당 원소 본래 타입으로 추출
+
+    - 두개 이상의 원소를 추출할 경우 리스트로 추출
+
+
+
+```python
+a = [1,2,3,4,5]
+
+print(a[2])
+print(a[-1])
+print(a[:3])
+```
+
+<pre>
+3
+5
+[1, 2, 3]
+</pre>
+## 5.2 리스트 업데이트
+
+ - 인덱스를 통해 리스트의 원소를 새로운 값으로 업데이트 가능
+
+
+
+```python
+a = [1,2,3,4,5]
+a[0] = 0
+a[-1] = 7
+
+print(a)
+```
+
+<pre>
+[0, 2, 3, 4, 7]
+</pre>
+## 5.3 자주 쓰이는 list 함수
+
+ - append() 함수
+
+  - 리스트의 마지막 인덱스에 항목을 추가
+
+
+
+```python
+a = [1,2,3,4,5]
+a.append(10)
+
+print(a)
+```
+
+<pre>
+[1, 2, 3, 4, 5, 10]
+</pre>
+- extend() 함수
+
+ - 해당 리스트에 다른 리스트의 원소들을 더하여 확장
+
+ - 연산자로도 확장이 가능
+
+
+
+```python
+a = [1,2,3,4,5]
+b = [6,7,8,9,10]
+
+a.extend(b)
+print(a)
+```
+
+<pre>
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</pre>
+
+```python
+a = [1,2,3,4,5]
+b = [6,7,8,9,10]
+
+a += b
+print(a)
+```
+
+<pre>
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</pre>
+
+```python
+a = [1,2,3,4,5]
+b = [6,7,8,9,10]
+
+a = a+b
+print(a)
+```
+
+<pre>
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</pre>
+- insert() 함수
+
+ - 추가하고자 하는 원소를 리스트로 원하는 위치에 추가
+
+ - (인덱스, 추가하고자 하는 원소) 작성
+
+
+
+```python
+a = [1,2,3,4,5]
+a.insert(1,20)
+
+print(a)
+```
+
+<pre>
+[1, 20, 2, 3, 4, 5]
+</pre>
+- remove() 함수
+
+ - 지우고자 하는 값을 지워주는 함수
+
+ - 인덱스가 아닌 item명 입력
+
+
+
+```python
+a = ["a",1,2,3,4,5]
+a.remove("a")
+
+print(a)
+```
+
+<pre>
+[1, 2, 3, 4, 5]
+</pre>
+
+```python
+a = ["a",1,2,3,4,5,"a"]
+a.remove("a")
+
+print(a)
+```
+
+<pre>
+[1, 2, 3, 4, 5, 'a']
+</pre>
+- index() 함수
+
+ - 찾고자 하는 값의 인덱스를 반환
+
+
+
+```python
+a = [1,2,3,4,5]
+a.index(5)
+```
+
+<pre>
+4
+</pre>
+- in 키워드
+
+ - 리스트 내에 해당 값이 존재하는지 확인하는 키워드
+
+ - value in [list]의 형태로 작성
+
+ - True, False 로 반환
+
+
+
+```python
+a = [1,2,3,4,5]
+b = 10
+
+c = b in a
+print(c, type(c))
+```
+
+<pre>
+False <class 'bool'>
+</pre>
+
+```python
+a = [1,2,3,4,5]
+b = 4
+
+c = b in a
+print(c, type(c))
+```
+
+<pre>
+True <class 'bool'>
+</pre>
+- list 정렬
+
+ - sort() 리스트 자체를 정렬시켜주는 리스트 함수
+
+ - sorted() 정렬된 리스트를 반환시켜주는 파이썬 기본 내장 함수
+
+
+
+```python
+a = [10,1,3,2,7,4,8,5,9,6]
+a.sort(reverse= True) # reverse = True 내림차순, 생략시 오름차순
+
+print(a)
+```
+
+<pre>
+[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+</pre>
+## 튜플 (tuple)
+
+ - 리스트처럼 여러 값을 하나의 집합에 표현하는 데이터 구조(공통점)
+
+ - 리스트는 대괄호, 튜플은 괄호로 둘러쌈 (차이점1)
+
+ - 튜플은 1개의 요소만을 가질 때는 요소 뒤에 콤마(,)를 붙여야 함(차이점2)
+
+ - 리스트와의 차이점은 생성된 후 문자열과 같이 변경 불가능(immutable)(차이점 3)
+
+   - 파이썬에는 리스트, 딕셔너리와 같은 변경 가능한(mutable) 자료형과 문자열, 튜플 같은 변경 불가능(immutable)한 자료형이 존재
+
+ - 얼핏 보면 튜플과 리스는 비슷한 역할을 하지만 프로그래밍을 할 때 튜플과 리스트는 구분해서 사용하는 것이 좋음
+
+   - 튜플과 리스트는 가장 큰 차이는 값을 변화시킬 수 있는가 없는가임
+
+   - 즉, 리스트의 항목값은 변화가 가능하고 튜플의 항목 값은 변화가 불가능함
+
+   - 따라서 프로그램이 실행되는 동안 그 값이 항상 변하지 않기를 바란다거나 값이 바뀔까 걱정하고싶지 않다면 주저하지 말고 튜플을 사용해야함
+
+   - 이와는 반대로 수시로 그 값을 변화시켜야할 경우라면 리스트를 사용해야 함
+
+   - 실제 프로그램에서는 값이 변경되는 형태의 변수가 훨씬 많기 때문에 평균적으로 튜플보다는 리스트를 더 많이 사용하게 됨
+
+
+
+```python
+a = [1]
+b = (1,)
+c = (1)
+
+print(a, type(a))
+print(b, type(b))
+print(c, type(c))
+```
+
+<pre>
+[1] <class 'list'>
+(1,) <class 'tuple'>
+1 <class 'int'>
+</pre>
+
+```python
+a = [1,2,3]
+b = (1,2,3)
+
+print(a, type(a))
+print(b, type(b))
+```
+
+<pre>
+[1, 2, 3] <class 'list'>
+(1, 2, 3) <class 'tuple'>
+</pre>
+### 6.1 튜플 언패킹(tuple unpacking)
+
+  - 튜플의 요소들을 각각의 변수로 할당
+
+  - 한 line으로 간편하게 표현이 가능하며, 괄호 또한 생략이 가능
+
+
+
+```python
+a,b,c,d = 10, 20, 30, 40
+
+print(a,b,c,d)
+```
+
+<pre>
+10 20 30 40
+</pre>
+- 튜플 언패킹은 값을 교환할 때 유용하게 사용 가능
+
+
+
+```python
+# 다른 프로그램 언어는 값을 교환하려면 임시 변수가 필요 했음
+a = 5
+b = 4
+
+temp = a
+a = b
+b = temp
+
+print(a)
+print(b)
+```
+
+<pre>
+4
+5
+</pre>
+
+```python
+a = 5
+b = 4
+
+a,b = b, a
+
+print(a)
+print(b)
+```
+
+<pre>
+4
+5
+</pre>
+## 7. 딕셔너리(dictionary)
+
+ - "이름" : "송유한"와 같이 한 쌍의 대응관계를 나타낼 수 있는 데이터 구조
+
+ - key : value의 구조를 가지고 있으며 ,로 구분
+
+   - key에는 숫자형, 문자형, 튜플과 같이 변경불가능(immutable)한 타입만 올 수 있으며 리스트나 딕셔너리는 key로 사용할 수 없다.
+
+   - value에는 모든 형태의 데이터가 올 수 있다.
+
+ - 순서가 존재하지 않음
+
+   - 대신, key를 인덱스처럼 활용 가능
+
+   - key를 통해 빠른 연산이 가능
+
+ - {}형태로 표현
+
+
+
+```python
+a = {"이름" : "임종준",
+    "키" : "173",
+    "혈액형" : "O형"}
+
+b = {0:1,
+    1:2,
+    2:3}
+
+c = {"a" : [1,2,3],
+    "b" : a}
+
+print(a)
+print(b)
+print(c)
+```
+
+<pre>
+{'이름': '임종준', '키': '173', '혈액형': 'O형'}
+{0: 1, 1: 2, 2: 3}
+{'a': [1, 2, 3], 'b': {'이름': '임종준', '키': '173', '혈액형': 'O형'}}
+</pre>
+### 7.1 딕셔너리 업데이트
+
+ - 기존에 key가 존재 하면 새로운 value로 업데이트 한다. 즉 key는 중복으로 존재할 수 없음
+
+ - 기존 key가 존재하지 않는다면, 새로운 key와 value가 추가됨
+
+ - value는 중복으로 존재 가능
+
+
+
+```python
+a = {"이름" : "임종준",
+    "키" : "173",
+    "혈액형" : "O형"}
+
+print(a)
+```
+
+<pre>
+{'이름': '임종준', '키': '173', '혈액형': 'O형'}
+</pre>
+
+```python
+#새로운 key, value 추가
+ a["소속"] = "DK BMC"
+    
+print(a)
+```
+
+ - update( ) 함수
+
+   - 두 딕셔너리를 합쳐주는 함수
+
+   - 중복되는 key가 있다면 합쳐지는 객체 key의 value로 덮어써짐
+
+
+
+```python
+a = {"a" : 1, "b" : 2, "c" : 3}
+b = {"a" : 2, "d" : 2, "e" : 5}
+
+a.update(b)
+
+print(a)
+```
+
+<pre>
+{'a': 2, 'b': 2, 'c': 3, 'd': 2, 'e': 5}
+</pre>
+- key 삭제
+
+ - del 키워들 사용하여 key 삭제
+
+
+
+```python
+a = {"이름" : "임종준",
+    "키" : "173",
+    "혈액형" : "O형"}
+
+print(a)
+
+del a['키']
+print(a)
+```
+
+<pre>
+{'이름': '임종준', '키': '173', '혈액형': 'O형'}
+{'이름': '임종준', '혈액형': 'O형'}
+</pre>
+- clear() 함수
+
+  - 딕셔너리의 모든 값을 초기화 한다
+
+
+
+```python
+a = {"이름" : "임종준",
+    "키" : "173",
+    "혈액형" : "O형"}
+
+print(a)
+
+a.clear()
+print(a)
+```
+
+<pre>
+{'이름': '임종준', '키': '173', '혈액형': 'O형'}
+{}
+</pre>
+- in 키워드
+
+ - key값의 존재를 확인(value는 불가)
+
+ - key값으로 검색하기 때문에 빠른 연산이 가능
+
+
+
+```python
+a = {"a" : 1, "b" : 2, "c" :3}
+
+print('d' in a)
+```
+
+<pre>
+False
+</pre>
+
+```python
+a = {"a" : 1, "b" : 2, "c" :3}
+
+print('a' in a)
+```
+
+<pre>
+True
+</pre>
+
+```python
+#value 값을 넣어준다면...
+
+a = {"a" : 1, "b" : 2, "c" :3}
+
+print('1' in a)
+```
+
+<pre>
+False
+</pre>
+- get () 함수
+
+  - key값으로 검색하여 value 값을 반환해주는 함수
+
+  - dic.[key] 형식으로 접근하면 key가 없는 경우 에러가 발생
+
+  - dic.get(key) 함수로 접근하면 None으로 반환되어 에러가 발생하지 않음
+
+
+
+```python
+a = {"a" : 1, "b" : 2, "c" :3}
+
+print(a['d'])
+```
+
+
+```python
+a = {"a" : 1, "b" : 2, "c" :3}
+
+print(a.get('d'))
+```
+
+<pre>
+None
+</pre>
+
+```python
+a = {"a" : 1, "b" : 2, "c" :3}
+
+print(a.get('c'))
+```
+
+<pre>
+3
+</pre>
+### 7.2 딕셔너리 원소 추출
+
+ - key() : key만 출력
+
+ - values() : value만 출력
+
+ - items() : (key, value) 튜플로 출력
+
+
+
+```python
+a = {"a" : 1, "b" : 2, "c" :3}
+
+print(a)c
+print(list(a.keys()))
+print(list(a.values()))
+print(list(a.items()))
+```
+
+<pre>
+{'a': 1, 'b': 2, 'c': 3}
+['a', 'b', 'c']
+[1, 2, 3]
+[('a', 1), ('b', 2), ('c', 3)]
+</pre>
+## 집합형(set)
+
+ - 수학에서의 집합과 동일한 개념
+
+ - set도 딕셔너리와 같이 {} 형태로 표현되며, 딕셔너리의 key와 같이 숫자형, 문자형 타입만 올 수 있음
+
+ - list()함수처럼 set()을 통해 리스트, 문자열 등의 데이터를 set으로 변경 할 수 있음
+
+
+
+```python
+a = [1,2,3,4,5]
+
+b = set(a)
+
+print(b)
+```
+
+<pre>
+{1, 2, 3, 4, 5}
+</pre>
+
+```python
+a = {1,2,3}
+b = {1,2,3,4,5}
+
+print(a.union(b)) #합집합
+print(a.intersection(b)) #교집합
+print(b.difference(a)) #차집합
+print(a.issubset(b)) #부분집합
+```
+
+<pre>
+{1, 2, 3, 4, 5}
+{1, 2, 3}
+{4, 5}
+True
+</pre>
