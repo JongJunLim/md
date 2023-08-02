@@ -6,13 +6,14 @@ has_children: false
 nav_order: 2.5
 ---
 <div style="text-align: right;">
-작성일자 : 2023-07-24
+작성일자 : 2023-07-24<br>
+수정일자 : 2023-08-02
 </div>
 
 ## DML(Data Manipulation Language)
 {: .d-inline-block }
 
-Ver 0.1.1
+Ver 0.1.2
 {: .label .label-green }
 
 - [1. INSERT](#chapter-1)<br>
@@ -430,5 +431,284 @@ ROLLBACK; -- 취소
 ---
 
 ### 4. MERGE <a id="chapter-4"></a>
+- MERGE 문을 사용하면 조건에 따라 데이터를 갱신하거나 삽입할 수 있다.
+  - 조인 조건을 만족하는 경우 갱신(UPDATE)를 수행하고, 만족하지 않을 경우 삽입(INSERT)를 수행한다.
 
-TBD
+```sql
+MERGE INTO target_table a
+USING (source_set) b
+   ON (join condition)
+ WHEN MATCHED THEN
+      UPDATE
+         SET a.COL1 = VAL1
+            ,a.COL2 = VAL2
+            ,...
+    [WHERE condition]
+  [DELETE
+    WHERE condition]
+ WHEN NOT MATCHED THEN
+      INSERT (a.COL1, a.COL2, ...)
+      VALUES (VAL1, VAL2, ...)
+     [WHERE condition]
+```
+
+- 구문 설명
+  - target_table : 갱신/삽입 대상 테이블 이름
+  - source_set : 병합(merge)할 소스 집합 (table / view / subquery)
+  - ON 절 : 대상 테이블과 소스 집합 간의 조인 조건
+  - MERGE UPDATE (WHEN MATCHED THEN 이하) : ON 절의 조인 조건을 만족하는 행에 대해 수행될 구문
+  - MERGE INTO (WHEN NOT MATCHED THEN 이하) : ON 절의 조인 조건을 만족하지 않는 행에 대해 수행될 구문
+<br><br>
+
+- 예시
+```sql
+INSERT INTO t1 (EMPNO, ENAME, SAL, DEPTNO)
+SELECT A.EMPNO
+      ,A.ENAME
+      ,A.SAL
+      ,A.DEPTNO
+    FROM EMP A
+   WHERE A.JOB = 'CLERK';
+```
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|**1300**|10|
+
+
+
+- MERGE 문 예시
+```sql
+MERGE INTO t1 a
+USING (SELECT b.EMPNO
+             ,b.ENAME
+             ,b.DEPTNO
+             ,b.SAL - 500 AS SAL
+         FROM EMP b
+        WHERE b.DEPTNO = 10) b
+   ON (b.EMPNO = a.EMPTNO)
+ WHEN MATCHED THEN
+      UPDATE
+         SET a.SAL = b.SAL
+ WHEN NOT MATCHED THEN
+      INSERT (a.EMPNO, a.ENAME, a.SAL, a.DEPTNO)
+      VALUES (b.EMPNO, b.ENAME, b.SAL, b.DEPTNO)
+```
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|**800**|10|
+|**7839**|**KING**|**4500**|**10**|
+|**7934**|**CLARK**|**1950**|**10**|
+
+
+
+```sql
+ROLLBACK; -- 취소
+```
+
+
+- MERGE 문 예시 (MERGE UPDATE 절 ONLY)
+```sql
+MERGE INTO t1 a
+USING (SELECT b.EMPNO
+             ,b.ENAME
+             ,b.DEPTNO
+             ,b.SAL - 500 AS SAL
+         FROM EMP b
+        WHERE b.DEPTNO = 10) b
+   ON (b.EMPNO = a.EMPTNO)
+ WHEN MATCHED THEN
+      UPDATE
+         SET a.SAL = b.SAL
+```
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|**800**|10|
+
+
+
+```sql
+ROLLBACK; -- 취소
+```
+
+
+- MERGE 문 예시 (MERGE UPDATE 절 ONLY - DELETE 문)
+```sql
+INSERT INTO t1 (EMPNO, ENAME, SAL, DEPTNO)
+SELECT A.EMPNO
+      ,A.ENAME
+      ,A.SAL
+      ,A.DEPTNO
+    FROM EMP A
+   WHERE A.JOB = 'CLERK';
+```
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|**1300**|10|
+
+
+```sql
+MERGE INTO t1 a
+USING (SELECT b.EMPNO
+             ,b.ENAME
+             ,b.DEPTNO
+             ,b.SAL - 500 AS SAL
+         FROM EMP b
+        WHERE b.DEPTNO = 10) b
+   ON (b.EMPNO = a.EMPTNO)
+ WHEN MATCHED THEN
+      UPDATE -- 수행 1
+         SET a.SAL = b.SAL
+      DELETE -- 수행 2
+       WHERE a.SAL < 1000;
+```
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+
+
+{: .important }
+> MERGE UPDATE 절에 기술한 DELETE 문은 UPDATE 문에 의해 갱신된 행들 중에서 WHERE 절 조건에 만족하는 행들만 삭제한다.
+
+
+```sql
+ROLLBACK; -- 취소
+```
+
+
+- MERGE 문 예시 (MERGE INSERT 절 ONLY)
+```sql
+INSERT INTO t1 (EMPNO, ENAME, SAL, DEPTNO)
+SELECT A.EMPNO
+      ,A.ENAME
+      ,A.SAL
+      ,A.DEPTNO
+    FROM EMP A
+   WHERE A.JOB = 'CLERK';
+```
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|1300|10|
+
+
+
+```sql
+MERGE INTO t1 a
+USING (SELECT b.EMPNO
+             ,b.ENAME
+             ,b.DEPTNO
+             ,b.SAL - 500 AS SAL
+         FROM EMP b
+        WHERE b.DEPTNO = 10) b
+   ON (b.EMPNO = a.EMPTNO)
+ WHEN NOT MATCHED THEN
+      INSERT (a.EMPNO, a.ENAME, a.SAL, a.DEPTNO)
+      VALUES (b.EMPNO, b.ENAME, b.SAL, b.DEPTNO)
+```
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|1300|10|
+|**7839**|**KING**|**4500**|**10**|
+|**7934**|**CLARK**|**1950**|**10**|
+
+ 
+
+```sql
+ROLLBACK; -- 취소
+```
+
+
+- MERGE 문 예시 (MERGE INSERT 절 ONLY - WHERE 절)
+```sql
+INSERT INTO t1 (EMPNO, ENAME, SAL, DEPTNO)
+SELECT A.EMPNO
+      ,A.ENAME
+      ,A.SAL
+      ,A.DEPTNO
+    FROM EMP A
+   WHERE A.JOB = 'CLERK';
+```
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|1300|10|
+
+
+
+```sql
+MERGE INTO t1 a
+USING (SELECT b.EMPNO
+             ,b.ENAME
+             ,b.DEPTNO
+             ,b.SAL - 500 AS SAL
+         FROM EMP b
+        WHERE b.DEPTNO = 10) b
+   ON (b.EMPNO = a.EMPTNO)
+ WHEN NOT MATCHED THEN
+      INSERT (a.EMPNO, a.ENAME, a.SAL, a.DEPTNO)
+      VALUES (b.EMPNO, b.ENAME, b.SAL, b.DEPTNO)
+       WHERE b.SAL > 3000;
+```
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7369|SMITH|800|20|
+|7876|ADAMS|1100|20|
+|7900|JAMES|950|30|
+|7934|MILLER|1300|10|
+|**7839**|**KING**|**4500**|**10**|
+
+ 
+
+ {: .important }
+> MERGE INSERT 절에 기술한 WHERE 절을 기술하면 조건에 해당하는 행만 선택적으로 삽입할 수 있다.
+
+
+```sql
+ROLLBACK; -- 취소
+```
