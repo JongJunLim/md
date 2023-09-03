@@ -1,5 +1,5 @@
 ---
-title: ALTER Table
+title: ALTER TABLE
 layout: default
 parent: DDL
 grand_parent: Oracle
@@ -11,13 +11,14 @@ nav_order: 2
 
 <div style="text-align: right;">
 작성일자 : 2023-08-18<br>
+수정일자 : 2023-09-03
 </div>
 
 
-## <span style="background-color:#FFF5b1">1. Create Table</span> <a id="chapter-1"></a>
+## <span style="background-color:#FFF5b1">ALTER TABLE</span> <a id="chapter-1"></a>
 {: .d-inline-block }
 
-Ver 0.1.1
+Ver 0.1.2
 {: .label .label-green }
 
 
@@ -26,13 +27,14 @@ Ver 0.1.1
 - [3.칼럼명 변경](#chapter-3)<br>
 - [4.제약조건(Constraints) 추가](#chapter-4)<br>
 - [5.제약조건(Constraints) 삭제](#chapter-5)<br>
-
+- [6.칼럼 삭제](#chapter-6)<br>
+- [7.COMMENT](#chapter-7)<br>
 
 ---
 
 ### **1. 칼럼 추가** <a id="chapter-1"></a>
 - 테이블에 칼럼을 추가할 때는 ALTER TABLE 명령문의 <u><b>ADD 절</b></u>을 사용한다.
-- 추가한 칼럼들은 기존 컬럼들 맨 뒤에 추가된다.
+- 추가한 칼럼들은 기존 칼럼들 맨 뒤에 추가된다.
 
   - Syntax
 
@@ -44,10 +46,10 @@ ALTER TABLE [schema.]table
 ```
 
 - 구문 설명
-  - column : 테이블에 추가할 칼럼의 이름
-  - datatype : 해당 칼럼에 저장될 데이터의 타입(ex. varchar2, number, date, ..)
-  - DEFAULT : 해당 칼럼에 값이 입력되지 않을 경우, 저장될 기본 값(expr)
-  - NOT NULL : 해당 칼럼에 NOT NULL 제약 조건을 지정
+  - <i>column</i> : 테이블에 추가할 칼럼의 이름
+  - <i>datatype</i> : 해당 칼럼에 저장될 데이터의 타입(ex. varchar2, number, date, ..)
+  - <i>DEFAULT</i> : 해당 칼럼에 값이 입력되지 않을 경우, 저장될 기본 값(expr)
+  - <i>NOT NULL</i> : 해당 칼럼에 NOT NULL 제약 조건을 지정
 
 
 EX)
@@ -92,10 +94,10 @@ ALTER TABLE [schema.]table
 ```
 
 - 구문 설명
-  - column : 수정하려는 칼럼의 이름
-  - datatype : 해당 칼럼에 저장될 데이터의 타입(ex. varchar2, number, date, ..)
-  - DEFAULT : 해당 칼럼에 값이 입력되지 않을 경우, 저장될 기본 값(expr)
-  - NOT NULL : 해당 칼럼에 NOT NULL 제약 조건을 지정
+  - <i>column</i> : 수정하려는 칼럼의 이름
+  - <i>datatype</i> : 해당 칼럼에 저장될 데이터의 타입(ex. varchar2, number, date, ..)
+  - <i>DEFAULT</i> : 해당 칼럼에 값이 입력되지 않을 경우, 저장될 기본 값(expr)
+  - <i>NOT NULL</i> : 해당 칼럼에 NOT NULL 제약 조건을 지정
 
 
 EX)
@@ -153,8 +155,8 @@ RENAME COLUMN old_column TO new_column;
 ```
 
 - 구문 설명
-  - old_column : 기존 칼럼의 변경 전 이름
-  - new_column : 칼럼의 변경 후 이름
+  - <i>old_column</i> : 기존 칼럼의 변경 전 이름
+  - <i>new_column</i> : 칼럼의 변경 후 이름
 
 
 EX)
@@ -194,9 +196,9 @@ ADD CONSTRAINT constraint_name constraint_type (column [, column, ...]);
 ```
 
 - 구문 설명
-  - constraint_name : 추가하려는 제약 조건의 이름
-  - constraint_type : 추가하려는 제약 조건의 유형
-  - column : 해당 제약 조건이 적용될 칼럼(들)
+  - <i>constraint_name</i> : 추가하려는 제약 조건의 이름
+  - <i>constraint_type</i> : 추가하려는 제약 조건의 유형
+  - <i>column</i> : 해당 제약 조건이 적용될 칼럼(들)
 
 <br>
 
@@ -324,8 +326,8 @@ DROP CONSTRAINT constraint_name [CASCADE];
 ```
 
 - 구문 설명
-  - constraint_name : 삭제하려는 제약 조건의 이름
-  - CASCADE : 참조하고 있는 FK 제약 조건을 함께 삭제
+  - <i>constraint_name</i> : 삭제하려는 제약 조건의 이름
+  - <i>CASCADE</i> : 참조하고 있는 FK 제약 조건을 함께 삭제
 
 <br>
 
@@ -388,4 +390,127 @@ COMMIT;
 |7499|ALLEN||**50**|19810220|500|
 |7902|FORD||**90**|19811203|500|
 
+---
+### **6. 칼럼 삭제** <a id="chapter-6"></a>
+기존 칼럼을 삭제할 때는 ALTER TABLE 명령문의 <u><b>DROP 절</b></u>을 사용한다.
+
+  - Syntax
+
+```sql
+ALTER TABLE [schema.]table
+DROP (column [, colmun, ...]) [CASCADE CONTRAINS];
+```
+
+- 구문 설명
+  - <i>column</i> : 삭제하려는 칼럼의 이름
+  - <i>CASCADE CONSTRAINTS</i> : 참조하고 있는 FK 제약 조건을 함께 삭제
+
+<br>
+
+
+EX) 칼럼 삭제 예제
+
+```sql
+ALTER TABLE t1
+DROP (hiredate, commission);
+```
+     
+```sql
+DESC t1
+```
+
+
+|COLUMN|Nullable|Type|
+|:-----|:------:|:---|
+|EMPNO||NUMBER(4)|
+|ENAME|NOT NULL|VARCHAR2(10)|
+|SAL||NUMBER(7,2)|
+|DEPTNO|NOT NULL|NUMBER(2)|
+
+
+
+|EMPNO|ENAME|SAL|DEPTNO|
+|----:|:----|--:|-----:|
+|7782|CLARK||10|
+|7369|SMITH||20|
+|7566|JONES||20|
+|7499|ALLEN||50|
+|7902|JONES||90|
+
+
+---
+### **7. COMMENT** <a id="chapter-7"></a>
+테이블에 관한 코멘트를 추가할 때는 <u><b>COMMENT 문</b></u>을 사용한다.
+
+  - Syntax
+
+```sql
+COMMENT ON TABLE [schema.]table
+IS 'comment';
+```
+
+- 구문 설명
+  - <i>table</i> : 대상 테이블명
+  - <i>comment</i> : 테이블에 추가할 코멘트
+
+<br>
+
+
+EX)
+
+```sql
+COMMENT ON TABLE t1 IS '사원';
+```
+     
+```sql
+SELECT a.*
+  FROM user_tab_comments a
+ WHERE a.table_name = 'T1';
+```
+
+
+|TABLE_NAME|TABLE_TYPE|COMMENT|
+|:-----|:------|:---|
+|T1|TABLE|사원|
+
+
+칼럼에 관한 코멘트를 추가할 때도 <u><b>COMMENT 문</b></u>을 사용한다.
+
+  - Syntax
+
+```sql
+COMMENT ON COLUMN [schema.]table.column
+IS 'comment';
+```
+
+- 구문 설명
+  - <i>table</i> : 대상 테이블명
+  - <i>column</i> : 대상 칼럼명
+  - <i>comment</i> : 테이블에 추가할 코멘트
+
+<br>
+
+
+EX)
+
+```sql
+COMMENT ON COLUMN t1.empno IS '사원번호';
+COMMENT ON COLUMN t1.ename IS '사원명';
+COMMENT ON COLUMN t1.sal IS '급여';
+COMMENT ON COLUMN t1.deptno IS '부서번호';
+```
+     
+```sql
+SELECT a.*
+  FROM user_col_comments a
+ WHERE a.table_name = 'T1';
+```
+
+
+|TABLE_NAME|COLUMN_NAME|COMMENT|
+|:-----|:------|:---|
+|T1|EMPNO|사원번호|
+|T1|ENAME|사원명|
+|T1|SAL|급여|
+|T1|DEPTNO|부서번호|
 
