@@ -24,7 +24,7 @@ parent : Projects
 1. 프로젝트 명칭 : 삼성 전자 DS 메모리 부분 세일즈포스 구축(Phase 1)
 2. 기간 : '22.01.04 ~ '22.05.06
 3. 장소 : 경기도 용인시, 테라타워
-4. 고객사 : <a href="hhttps://semiconductor.samsung.com/kr/" target="_blank">삼성전자 DS</a> (제조사)
+4. 고객사 : <a href="hhttps://semiconductor.samsung.com/kr/" target="_blank">삼성전자 DS 메모리사업부</a> (제조사)
 5. 업무 : 대시보드 3개 개발 (C360 관련 매출 대시보드)
 6. 데이터 소스 : 오라클
 7. 배운점 및 느낀점<br>
@@ -44,7 +44,7 @@ parent : Projects
 
 해당 프로젝트는 세일즈포스 구축 프로젝트로 태블로 대시보드도 동시에 개발하여 세일즈포스에 임베딩하여 사용하고 있었다. 10여명이 넘는 세일즈포스 직원들이 있었고, 태블로 개발자는 나를 포함한 동료직원 1명으로 총 2명이었다.
 
-내가 담당하게 될 대시보드는 C360(Customer 360)의 Home 화면에 임베딩될 화면 1개와, Sales Summay, 그리고 Account의 Sales Summar 이렇게 총 3개였다.
+내가 담당하게 될 대시보드는 C360(Customer 360)의 Home 화면에 임베딩될 화면 1개와, Sales Summary, 그리고 Account의 Sales Summary 이렇게 총 3개였다.
 
 고객의 요건을 충족시키기 위해서 **커스텀 쿼리**를 써야할 필요성이 있었다. 사실 그 당시에는 부끄럽지만 복잡한 쿼리문에 대해서 잘 알지 못했다. 직접 쿼리를 작성하지는 못했지만, 앞으로의 미래를 위해서 쿼리 공부를 열심히 해야할 것이라고 결심하기도 했었다. (자격증이 실력을 보증한다고 할 수는 없지만 꾸준히 공부한 끝에 프로젝트 종료 후 6월에 **SQLD 자격증을 취득**하기도 했었다.)
 
@@ -62,7 +62,7 @@ parent : Projects
 1. Name : Samsung Electronics DS Memory Division SFDC (Salesforce) Establishment
 2. Period : '22.01.04 ~ '22.05.06
 3. Location : Terra Tower, Yongin
-4. Customer: <a href="https://semiconductor.samsung.com/" target="_blank">Samsung Electronics</a> (manufacturer)
+4. Customer: <a href="https://semiconductor.samsung.com/" target="_blank">Samsung Electronics Memory Division</a> (manufacturer)
 5. Task : Developed 3 dashboards (sales dashboard related with C360)
 6. Data Source : Oracle
 7. What I learned and felt<br>
@@ -81,7 +81,7 @@ The project site was located in Yongin, Gyeonggi-do. There were Samsung Electron
 
 The project was a salesforce Establishment project, and tableau dashboards were also developed and embedded in the salesforce. There were more than 10 Salesforce employees, and the Tableau developer was one fellow employee, including me, with a total of two.
 
-The dashboards I will be in charge of were one screen to be embedded in the Home screen of the C360 (Customer 360), Sales Summay, and Account's Sales Summar.
+The dashboards I will be in charge of were one screen to be embedded in the Home screen of the C360 (Customer 360), Sales Summary, and Account's Sales Summary.
 
 There was a need to write a **custom query** to meet the customer's requirements. In fact, I didn't know much about complicated query statements at the time. I couldn't write my own queries, but I also decided that I would have to study them hard for the future. (The certificate cannot be said to guarantee skills, but after studying steadily, I also obtained a **SQLD certificate** in June after the project was completed.)
 
