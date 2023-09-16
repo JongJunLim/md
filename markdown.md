@@ -5,21 +5,22 @@ parent: Markdown
 nav_order: 1
 ---
 <div style="text-align: right;">
-작성일자 : 2023-09-16<br>
+작성일자 : 2023-06-19<br>
+수정일자 : 2023-09-16
 </div>
 
 ## <span style="background-color:#FFF5b1">Markdown Syntax</span>
 {: .d-inline-block }
 
-Ver 0.1.1
+Ver 0.1.5
 {: .label .label-green }
  
 
 - [1. 제목](#chapter-1)<br>
 - [2. 구분선 및 줄바꿈](#chapter-2)<br>
-- [3. 글자속성](#chapter-3)<br>
-  - [3.1 밑줄, 볼드, 취소선, 기울임체](#chapter-3.1)<br>
-  - [3.2 색상, 배경색](#chapter-3.2)<br>
+- [3. 글자 속성](#chapter-3)<br>
+  - [3.1 강조](#chapter-3.1)<br>
+  - [3.2 색상](#chapter-3.2)<br>
 - [4. 인용문구](#chapter-4)<br>
 - [5. 들여쓰기](#chapter-5)<br>
 - [6. 이미지](#chapter-6)<br>
@@ -32,6 +33,7 @@ Ver 0.1.1
 
 
 ---
+> 마크다운(Markdown)은 일반 텍스트 기반의 경량 마크업 언어다. 일반 텍스트로 서식이 있는 문서를 작성하는 데 사용되며, 일반 마크업 언어에 비해 문법이 쉽고 간단한 것이 특징이다. HTML과 리치 텍스트(RTF) 등 서식 문서로 쉽게 변환되기 때문에 응용 소프트웨어와 함께 배포되는 README 파일이나 온라인 게시물 등에 많이 사용된다.
 
 # 1. 제목<a id="chapter-1"></a>
 '#' 기호로 제목 나눔 (1~6개)
@@ -68,14 +70,14 @@ ___
 
 #### 줄바꿈
 ```
-Jong Jun Lim <br> Just Do it
+JayJay <br> Just Do It
 ```
-Jong Jun Lim <br> Just Do it
+JayJay <br> Just Do It
 
 ---
 # 3. 글자 속성<a id="chapter-3"></a>
 
-## 3.1 밑줄, 볼드, 취소선, 기울임체<a id="chapter-3.1"></a>
+## 3.1 강조<a id="chapter-3.1"></a>
 ```
 *Just Do It*
 ```
@@ -104,12 +106,23 @@ Just Do~~n't~~ ~~qu~~it
 Just Do~~n't~~ ~~qu~~it
 
 ```
+Just Do<del>n't</del> <del>qu</del>it
+```
+Just Do<del>n't</del> <del>qu</del>it
+
+
+```
 **Just Do**~~**n't**~~ ~~**qu**~~**it**
 ```
 **Just Do**~~**n't**~~ ~~**qu**~~**it**
 
 
-## 3.2 색상, 배경색<a id="chapter-3.2"></a>
+```
+==Just Do it==
+```
+==Just Do it==
+
+## 3.2 색상<a id="chapter-3.2"></a>
 
 ```
 <span style="color: #CC0000; background-color: #FFFF33;">Just Do It</span>
@@ -117,9 +130,14 @@ Just Do~~n't~~ ~~qu~~it
 <span style="color: #CC0000; background-color: #FFFF33;">Just Do It</span>
 
 ```
-<span style="color: red; background-color: yellow;">Just Do It</span>
+<span style="color: red; background-color: skyblue;">Just Do It</span>
 ```
-<span style="color: RED; background-color: yellow;">Just Do It</span>
+<span style="color: RED; background-color: skyblue;">Just Do It</span>
+
+```
+<span style="color:rgb(245, 235, 13)">rgb(245, 235, 13)</span>
+```
+<span style="background-color:rgb(245, 235, 13);">Just Do It</span>
 
 
 <details>
@@ -204,9 +222,9 @@ Just Do~~n't~~ ~~qu~~it
 - 사이즈 변경은 <img width="ooopx" height="ooopx"></img>
 - 링크와 이미지를 합친 문법
 [ ![텍스트](이미지URL) ]( 링크URL )
-[![텍스트](https://t1.daumcdn.net/cfile/tistory/2444873B57E257821F)](https://unity3d.com/kr)
+[![텍스트](https://static.nike.com/a/images/f_jpg,q_auto:eco/61b4738b-e1e1-4786-8f6c-26aa0008e80b/swoosh-logo-black.png)](https://www.nike.com/kr/)
 
-<img src="https://i1.sndcdn.com/avatars-000639959556-jhitcq-t500x500.jpg" width="200" height="200" />
+<img src="https://imgur.com/JUQRe.jpg" width="500" height="200" />
 
 <!-- a태그를 이용한 이미지 링크 생성법-->
 <a href="#">
@@ -220,9 +238,12 @@ Just Do~~n't~~ ~~qu~~it
 - 사이즈 변경은 <img width="ooopx" height="ooopx"></img>
 - 링크와 이미지를 합친 문법
 [ ![텍스트](이미지URL) ]( 링크URL )
-[![텍스트](https://t1.daumcdn.net/cfile/tistory/2444873B57E257821F)](https://unity3d.com/kr)
+[![텍스트](https://static.nike.com/a/images/f_jpg,q_auto:eco/61b4738b-e1e1-4786-8f6c-26aa0008e80b/swoosh-logo-black.png
+)](https://www.nike.com/kr/
+)
 
-<img src="https://i1.sndcdn.com/avatars-000639959556-jhitcq-t500x500.jpg" width="200" height="200" />
+<img src="https://imgur.com/JUQRe.jpg" width="500" height="200" />
+
 
 <!-- a태그를 이용한 이미지 링크 생성법-->
 <a href="#">
@@ -241,20 +262,18 @@ Just Do~~n't~~ ~~qu~~it
 [Github](http://www.github.com "깃허브")
 
 구글 www.google.com
-네이버 <www.naver.com>
-My mail inpa.dev@gmail.com
+네이버 www.naver.com
 
-[링크는 젤다의전설 주인공 이름](http://zeldahagoshipda.com)
+[Nike.com](https://www.nike.com/kr/)
 ```
 [Google](http://www.google.com "구글")
 [Naver](http://www.naver.com "네이버")
 [Github](http://www.github.com "깃허브")
 
 구글 www.google.com
-네이버 <www.naver.com>
-My mail inpa.dev@gmail.com
+네이버 www.naver.com
 
-[링크는 젤다의전설 주인공 이름](http://zeldahagoshipda.com)
+[Nike.com](https://www.nike.com/kr/)
 
 - 방법2
 ```
@@ -362,19 +381,19 @@ Left|Center|Right
 마크다운에서 토글은 지원하지 않는다. 그렇기 때문에 html의 태그를 사용해서 토글 기능을 사용할 수 있다. 이 기능을 제공하는 html의 태그가 바로 details이다. 그리고 div markdown="1"을 꼭 넣어줘야 하는데 이것은 jekyll에서 html사이에 markdown을 인식 하기 위한 코드이다.
 ```markdown
 <details>
-<summary>토글 접기/펼치기</summary>
+<summary>Nike Slogan</summary>
 <div markdown="1">
 
-안녕
+Just Do It
 
 </div>
 </details>
 ```
 <details>
-<summary>토글 접기/펼치기</summary>
+<summary>Nike Slogan</summary>
 <div markdown="1">
 
-안녕
+Just Do It
 
 </div>
 </details>
